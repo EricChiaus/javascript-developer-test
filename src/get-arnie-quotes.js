@@ -13,6 +13,10 @@ const getArnieQuotes = async (urls) => {
         return { 'FAILURE': body.message };
       }
     } catch (error) {
+      // The code returns a FAILURE object instead of throwing based on these considerations:
+      // 1. Requirement clearly states to process "every passed in URL"
+      // 2. The test expects not to throw errors
+      // 3. Consistent return format for both success and failure cases
       // Handle both Error objects and string errors
       const errorMessage = error instanceof Error ? error.message : String(error);
       return { 'FAILURE': errorMessage };
